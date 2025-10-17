@@ -29,9 +29,9 @@ if ingridients:
 
     for fruit in ingridients:
         ingridients_string += fruit + ' '
-        smoothiefroot_response = requests.get("https://my.smoothiefroot.com/api/fruit/" + fruit)
         sf_df = st.dataframe(data=smoothiefroot_response.json(), use_container_width=True) 
         search_on=pd_df.loc[pd_df['FRUIT_NAME'] == fruit, 'SEARCH_ON'].iloc[0]
+        smoothiefroot_response = requests.get("https://my.smoothiefroot.com/api/fruit/" + search_on)
         st.write('The search value for ', fruit,' is ', search_on, '.')
     my_insert_stmt = """ insert into smoothies.public.orders(name_on_order ,ingredients)
             values ('""" + name_on_smoothie + "','" + ingridients_string + """')"""
