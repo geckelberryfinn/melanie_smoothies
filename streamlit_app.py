@@ -7,7 +7,6 @@ smoothiefroot_response = requests.get("https://my.smoothiefroot.com/api/fruit/wa
 
 # Write directly to the app
 st.title(f":cup_with_straw: Customize Your Smoothie! :cup_with_straw:")
-st.text(smoothiefroot_response)
 
 st.write(
   """Choose the fruits for your custom Smoothie 
@@ -22,6 +21,8 @@ dataframe = session.table("smoothies.public.fruit_options").select(col("fruit_na
 ingridients = st.multiselect("Choose up to 5 fruits", 
                              dataframe,
                             max_selections=5)
+sf_df = st.dataframe(data=smoothiefroot_response.json(), use_container_width=True) 
+
 if ingridients:
     ingridients_string = ''
 
